@@ -4,644 +4,1032 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Deborah Odion | AI Automation Specialist</title>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <meta name="description" content="I build AI automation systems for businesses: voice receptionists, chatbots, lead generation engines and email workflows, built end to end in n8n, Vapi, ElevenLabs and Voiceflow." />
+
+  <!-- Link previews for TikTok / YouTube / LinkedIn shares -->
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://automatewithdebby.github.io/" />
+  <meta property="og:title" content="Deborah Odion | AI Automation Specialist" />
+  <meta property="og:description" content="Voice receptionists, chatbots, lead generation engines and email workflows, built end to end." />
+  <meta property="og:image" content="https://automatewithdebby.github.io/deborah-photo.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="theme-color" content="#F3F0EA" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@500;700;800&family=IBM+Plex+Mono:wght@400;500&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet" />
+
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      --navy:      #0b0f1e;
-      --navy2:     #111629;
-      --navy3:     #171d35;
-      --gold:      #c9a84c;
-      --gold-lt:   #e8c97a;
-      --gold-dim:  #9b7d35;
-      --white:     #f4f0e8;
-      --muted:     #8a8fa8;
-      --border:    rgba(201,168,76,0.18);
+      /* Warm paper + ink + one accent. Three colours, nothing else. */
+      --paper:      #F3F0EA;
+      --paper-2:    #EAE6DC;
+      --ink:        #14110E;
+      --ink-soft:   #221E19;
+      --ink-2:      #57514A;
+      --accent:     #C4360F;
+      --accent-wash:rgba(196,54,15,0.07);
+      --rule:       rgba(20,17,14,0.13);
+      --rule-dark:  rgba(243,240,234,0.16);
+
+      --display: 'Bricolage Grotesque', Georgia, serif;
+      --body:    'Instrument Sans', system-ui, -apple-system, sans-serif;
+      --mono:    'IBM Plex Mono', ui-monospace, monospace;
+
+      /* A real scale, not eight things all sized 0.9rem */
+      --t-display: clamp(2.9rem, 7.2vw, 5.75rem);
+      --t-h2:      clamp(2rem, 4.4vw, 3.25rem);
+      --t-h3:      1.28rem;
+      --t-lead:    clamp(1.05rem, 1.6vw, 1.2rem);
+      --t-body:    1.0rem;
+      --t-small:   0.8125rem;
+
+      --gutter: clamp(20px, 6vw, 86px);
+      --maxw: 1240px;
     }
 
-    html { scroll-behavior: smooth; }
+    html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
 
     body {
-      background: var(--navy);
-      color: var(--white);
-      font-family: 'Inter', sans-serif;
-      font-size: 16px;
-      line-height: 1.7;
+      background: var(--paper);
+      color: var(--ink);
+      font-family: var(--body);
+      font-size: var(--t-body);
+      line-height: 1.65;
       overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
     }
 
-    /* NAV */
-    nav {
-      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-      display: flex; align-items: center; justify-content: space-between;
-      padding: 18px 6vw;
-      background: rgba(11,15,30,0.92);
-      backdrop-filter: blur(14px);
-      border-bottom: 1px solid var(--border);
+    .wrap { max-width: var(--maxw); margin: 0 auto; }
+
+    a { color: inherit; }
+
+    ::selection { background: var(--accent); color: var(--paper); }
+
+    :focus-visible {
+      outline: 2px solid var(--accent);
+      outline-offset: 3px;
+      border-radius: 2px;
+    }
+
+    .eyebrow {
+      font-family: var(--mono);
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.13em;
+      color: var(--accent);
+    }
+
+    .skip {
+      position: absolute; left: -9999px; top: 0;
+      background: var(--ink); color: var(--paper);
+      padding: 12px 20px; z-index: 500;
+    }
+    .skip:focus { left: 0; }
+
+    /* ─────────────── NAV ─────────────── */
+    header.nav {
+      position: sticky; top: 0; z-index: 100;
+      background: rgba(243,240,234,0.88);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--rule);
+    }
+    .nav-inner {
+      max-width: var(--maxw); margin: 0 auto;
+      padding: 14px var(--gutter);
+      display: flex; align-items: center; justify-content: space-between; gap: 20px;
     }
     .nav-logo {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 0.95rem; font-weight: 500;
-      color: var(--gold-lt); text-decoration: none;
+      font-family: var(--mono);
+      font-size: 0.85rem; font-weight: 500;
+      text-decoration: none; letter-spacing: -0.01em;
+      white-space: nowrap;
     }
-    .nav-links { display: flex; gap: 2rem; list-style: none; }
-    .nav-links a { color: var(--muted); text-decoration: none; font-size: 0.875rem; font-weight: 500; transition: color 0.2s; }
-    .nav-links a:hover { color: var(--white); }
-    .nav-cta {
-      background: var(--gold); color: var(--navy);
-      text-decoration: none; padding: 9px 22px; border-radius: 8px;
-      font-size: 0.875rem; font-weight: 700;
-      transition: background 0.2s, transform 0.15s;
-    }
-    .nav-cta:hover { background: var(--gold-lt); transform: translateY(-1px); }
+    .nav-logo b { color: var(--accent); font-weight: 500; }
 
-    /* HERO */
-    #hero {
-      min-height: 100vh;
-      display: flex; flex-direction: column;
-      align-items: center; justify-content: center;
-      text-align: center; padding: 120px 6vw 80px;
-      position: relative; overflow: hidden;
+    .nav-right { display: flex; align-items: center; gap: 26px; }
+    .nav-links { display: flex; gap: 26px; list-style: none; }
+    .nav-links a {
+      text-decoration: none; font-size: 0.875rem; font-weight: 500;
+      color: var(--ink-2); padding: 4px 0;
+      border-bottom: 1px solid transparent;
+      transition: color .18s, border-color .18s;
     }
-    #hero::before {
-      content: '';
-      position: absolute; inset: 0;
-      background: radial-gradient(ellipse 65% 50% at 50% 38%, rgba(201,168,76,0.1) 0%, transparent 70%);
-      pointer-events: none;
+    .nav-links a:hover { color: var(--ink); border-bottom-color: var(--accent); }
+
+    .btn {
+      display: inline-flex; align-items: center; gap: 9px;
+      text-decoration: none; font-weight: 600;
+      font-size: 0.9rem; line-height: 1;
+      padding: 13px 22px; border-radius: 2px;
+      border: 1px solid transparent;
+      transition: background .18s, color .18s, border-color .18s;
+      cursor: pointer; font-family: var(--body);
+    }
+    .btn-solid { background: var(--accent); color: #fff; }
+    .btn-solid:hover { background: var(--ink); }
+    .btn-line { background: transparent; color: var(--ink); border-color: var(--ink); }
+    .btn-line:hover { background: var(--ink); color: var(--paper); }
+    .btn-sm { padding: 10px 17px; font-size: 0.83rem; }
+    .on-dark .btn-line { color: var(--paper); border-color: var(--rule-dark); }
+    .on-dark .btn-line:hover { background: var(--paper); color: var(--ink); border-color: var(--paper); }
+
+    /* Hamburger: the original just hid the links on mobile with no replacement */
+    .nav-toggle {
+      display: none;
+      width: 42px; height: 42px;
+      background: transparent; border: 1px solid var(--rule);
+      border-radius: 2px; cursor: pointer;
+      align-items: center; justify-content: center; flex-direction: column; gap: 5px;
+      padding: 0;
+    }
+    .nav-toggle .bar {
+      display: block; width: 18px; height: 1.5px; background: var(--ink);
+      transition: transform .22s ease, opacity .18s ease;
+    }
+    .nav-toggle[aria-expanded="true"] .bar:nth-child(1) { transform: translateY(3.25px) rotate(45deg); }
+    .nav-toggle[aria-expanded="true"] .bar:nth-child(2) { transform: translateY(-3.25px) rotate(-45deg); }
+
+    .nav-panel {
+      display: none;
+      border-top: 1px solid var(--rule);
+      background: var(--paper);
+      padding: 8px var(--gutter) 22px;
+    }
+    .nav-panel.open { display: block; }
+    .nav-panel ul { list-style: none; }
+    .nav-panel a {
+      display: block; padding: 15px 0;
+      border-bottom: 1px solid var(--rule);
+      text-decoration: none; font-size: 1.05rem; font-weight: 500;
+      font-family: var(--display);
+    }
+    .nav-panel .btn { margin-top: 20px; width: 100%; justify-content: center; }
+
+    /* ─────────────── HERO ─────────────── */
+    #hero { padding: clamp(48px, 7vw, 96px) var(--gutter) 0; }
+    .hero-grid {
+      max-width: var(--maxw); margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1.05fr 0.95fr;
+      gap: clamp(24px, 4vw, 64px);
+      align-items: end;
+    }
+    .hero-copy { padding-bottom: clamp(30px, 5vw, 76px); }
+
+    .status {
+      display: inline-flex; align-items: center; gap: 9px;
+      font-family: var(--mono); font-size: 0.74rem;
+      letter-spacing: 0.07em; text-transform: uppercase;
+      color: var(--ink-2); margin-bottom: 30px;
+    }
+    .status i {
+      width: 6px; height: 6px; border-radius: 50%;
+      background: var(--accent); display: block; flex: none;
     }
 
-    .hero-photo-wrap {
-      position: relative; width: 164px; height: 164px; margin-bottom: 28px;
+    h1 { margin-bottom: 26px; }
+    .h1-name {
+      display: block;
+      font-family: var(--mono);
+      font-size: 0.82rem; font-weight: 500;
+      letter-spacing: 0.16em; text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 20px;
     }
-    .hero-photo-ring {
-      position: absolute; inset: -4px; border-radius: 50%;
-      background: conic-gradient(from 0deg, var(--gold), var(--gold-lt), var(--gold-dim), var(--gold));
-      animation: spin 7s linear infinite;
+    .h1-stmt {
+      display: block;
+      font-family: var(--display);
+      font-size: var(--t-display);
+      font-weight: 800;
+      line-height: 0.96;
+      letter-spacing: -0.035em;
+      text-wrap: balance;
     }
-    .hero-photo-ring2 {
-      position: absolute; inset: -11px; border-radius: 50%;
-      border: 1px dashed rgba(201,168,76,0.3);
-      animation: spin 14s linear infinite reverse;
+    .h1-stmt em { font-style: normal; color: var(--accent); }
+
+    .hero-bio {
+      font-size: var(--t-lead);
+      color: var(--ink-2);
+      max-width: 46ch;
+      line-height: 1.6;
+      margin-bottom: 34px;
     }
-    @keyframes spin { to { transform: rotate(360deg); } }
-    .hero-photo {
-      position: relative; z-index: 1;
-      width: 164px; height: 164px; border-radius: 50%;
-      object-fit: cover; object-position: top center;
-      border: 3px solid var(--navy);
+    .hero-btns { display: flex; gap: 12px; flex-wrap: wrap; }
+
+    /* The photo is a studio shot on white, so multiply drops the white into the
+       paper so it reads as a cut-out instead of a cropped circle avatar. */
+    .hero-portrait { position: relative; align-self: end; }
+    .hero-portrait img {
+      display: block; width: 100%; height: auto;
+      mix-blend-mode: multiply;
+      /* Studio white is not quite 255; clip it so multiply leaves the paper clean */
+      filter: brightness(1.05) contrast(1.03);
     }
 
-    .available-pill {
-      display: inline-flex; align-items: center; gap: 7px;
-      background: rgba(201,168,76,0.1);
-      border: 1px solid rgba(201,168,76,0.3);
-      border-radius: 99px; padding: 6px 18px;
-      font-size: 0.8rem; font-weight: 500; color: var(--gold-lt);
-      margin-bottom: 22px;
+    /* ─────────────── STACK BAND ─────────────── */
+    .stack {
+      background: var(--ink); color: var(--paper);
+      padding: 22px var(--gutter);
+      border-top: 1px solid var(--ink);
     }
-    .available-pill .dot {
-      width: 7px; height: 7px; border-radius: 50%;
-      background: var(--gold); box-shadow: 0 0 7px var(--gold);
-      animation: pulse 2s ease-in-out infinite;
-    }
-    @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.35} }
-
-    h1 {
-      font-family: 'Playfair Display', serif;
-      font-size: clamp(2.8rem, 7vw, 5rem);
-      font-weight: 900; line-height: 1.1; margin-bottom: 10px;
-      background: linear-gradient(135deg, var(--white) 40%, var(--gold-lt));
-      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
-    }
-    .hero-handle {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 0.9rem; color: var(--gold); margin-bottom: 14px; letter-spacing: 0.04em;
-    }
-    .hero-tagline { font-size: 1rem; font-weight: 500; color: var(--gold-lt); margin-bottom: 18px; }
-    .hero-bio { max-width: 560px; color: var(--muted); font-size: 1rem; line-height: 1.85; margin-bottom: 40px; }
-    .hero-btns { display: flex; gap: 14px; flex-wrap: wrap; justify-content: center; }
-
-    .btn-primary {
-      display: inline-flex; align-items: center; gap: 8px;
-      background: var(--gold); color: var(--navy);
-      text-decoration: none; padding: 14px 28px; border-radius: 10px;
-      font-weight: 700; font-size: 0.95rem;
-      transition: background 0.2s, transform 0.15s, box-shadow 0.2s;
-      box-shadow: 0 0 28px rgba(201,168,76,0.3);
-    }
-    .btn-primary:hover { background: var(--gold-lt); transform: translateY(-2px); box-shadow: 0 0 40px rgba(201,168,76,0.45); }
-    .btn-secondary {
-      display: inline-flex; align-items: center; gap: 8px;
-      background: transparent; color: var(--white);
-      text-decoration: none; padding: 14px 28px; border-radius: 10px;
-      font-weight: 600; font-size: 0.95rem;
-      border: 1px solid var(--border);
-      transition: border-color 0.2s, transform 0.15s;
-    }
-    .btn-secondary:hover { border-color: var(--gold-lt); transform: translateY(-2px); }
-
-    /* STACK */
-    .stack-strip {
-      background: var(--navy2);
-      border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);
-      padding: 20px 6vw;
-      display: flex; align-items: center; justify-content: center; gap: 10px; flex-wrap: wrap;
+    .stack-inner {
+      max-width: var(--maxw); margin: 0 auto;
+      display: flex; align-items: center; gap: 12px 26px; flex-wrap: wrap;
+      font-family: var(--mono); font-size: 0.78rem;
     }
     .stack-label {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 0.72rem; color: var(--muted);
-      text-transform: uppercase; letter-spacing: 0.1em; margin-right: 6px;
+      color: rgba(243,240,234,0.45);
+      text-transform: uppercase; letter-spacing: 0.13em; font-size: 0.7rem;
     }
-    .stack-tag {
-      background: rgba(201,168,76,0.08); border: 1px solid var(--border);
-      border-radius: 6px; padding: 5px 14px;
-      font-size: 0.8rem; font-weight: 500; color: var(--gold-lt);
+    .stack-list { display: flex; gap: 12px 22px; flex-wrap: wrap; }
+    .stack-list span { color: var(--paper); }
+    .stack-list span::before { content: '\002F\0020'; color: var(--accent); }
+
+    /* ─────────────── SECTIONS ─────────────── */
+    section { padding: clamp(66px, 9vw, 128px) var(--gutter); }
+    /* px, not ch, because ch here would resolve against this box's 16px font, not the h2's */
+    .section-head { margin-bottom: clamp(38px, 5vw, 64px); max-width: 620px; }
+    .section-head .eyebrow { display: block; margin-bottom: 14px; }
+    h2 {
+      font-family: var(--display);
+      font-size: var(--t-h2);
+      font-weight: 700; line-height: 1.02;
+      letter-spacing: -0.03em;
+      text-wrap: balance;
     }
 
-    /* SECTIONS */
-    section { padding: 90px 6vw; }
-    .section-label {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 0.72rem; color: var(--gold);
-      text-transform: uppercase; letter-spacing: 0.14em; margin-bottom: 10px;
+    /* ─────────────── APPROACH ─────────────── */
+    /* Three numbered points, not a six-card wall of near-identical claims. */
+    .approach { border-top: 1px solid var(--rule); }
+    .approach-item {
+      display: grid;
+      grid-template-columns: 90px minmax(0, 1fr) minmax(0, 1.25fr);
+      gap: clamp(16px, 3vw, 48px);
+      padding: clamp(30px, 3.6vw, 46px) 0;
+      border-bottom: 1px solid var(--rule);
+      align-items: start;
     }
-    .section-title {
-      font-family: 'Playfair Display', serif;
-      font-size: clamp(1.9rem, 4vw, 2.8rem);
-      font-weight: 700; margin-bottom: 48px; line-height: 1.2; color: var(--white);
+    .approach-num {
+      font-family: var(--mono); font-size: 0.8rem; font-weight: 500;
+      color: var(--accent); padding-top: 6px; letter-spacing: 0.06em;
     }
-    .section-title span { color: var(--gold-lt); }
+    .approach-item h3 {
+      font-family: var(--display);
+      font-size: clamp(1.35rem, 2.3vw, 1.85rem);
+      font-weight: 700; line-height: 1.12; letter-spacing: -0.02em;
+    }
+    .approach-item p { color: var(--ink-2); font-size: 1.02rem; line-height: 1.7; }
 
-    /* WHY */
-    #why { background: var(--navy2); }
-    .why-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
-    .why-card {
-      background: var(--navy3); border: 1px solid var(--border);
-      border-radius: 14px; padding: 28px;
-      transition: border-color 0.25s, transform 0.2s, box-shadow 0.2s;
-    }
-    .why-card:hover { border-color: var(--gold); transform: translateY(-3px); box-shadow: 0 8px 32px rgba(201,168,76,0.12); }
-    .why-icon { font-size: 1.6rem; margin-bottom: 14px; }
-    .why-card h3 { font-size: 0.98rem; font-weight: 600; margin-bottom: 9px; color: var(--white); }
-    .why-card p { color: var(--muted); font-size: 0.875rem; line-height: 1.75; }
+    /* ─────────────── WORK ─────────────── */
+    #work { background: var(--paper-2); }
 
-    /* PROJECTS */
-    #projects { background: var(--navy); }
-    .projects-filter { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 36px; }
+    .filters {
+      display: flex; gap: 8px; flex-wrap: wrap;
+      margin-bottom: 34px; padding-bottom: 26px;
+      border-bottom: 1px solid var(--rule);
+    }
     .filter-btn {
-      background: transparent; border: 1px solid var(--border);
-      color: var(--muted); padding: 7px 18px; border-radius: 99px;
+      background: transparent; border: 1px solid var(--rule);
+      color: var(--ink-2); padding: 9px 18px; border-radius: 2px;
       font-size: 0.82rem; font-weight: 500; cursor: pointer;
-      transition: all 0.2s; font-family: inherit;
+      font-family: var(--mono); letter-spacing: 0.02em;
+      transition: background .18s, color .18s, border-color .18s;
     }
-    .filter-btn.active, .filter-btn:hover { background: var(--gold); border-color: var(--gold); color: var(--navy); font-weight: 700; }
+    .filter-btn:hover { border-color: var(--ink); color: var(--ink); }
+    .filter-btn[aria-pressed="true"] {
+      background: var(--ink); border-color: var(--ink); color: var(--paper);
+    }
 
-    .projects-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(340px, 1fr)); gap: 22px; }
-    .project-card {
-      background: var(--navy2); border: 1px solid var(--border);
-      border-radius: 16px; overflow: hidden;
-      transition: border-color 0.25s, transform 0.2s, box-shadow 0.2s;
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: clamp(20px, 2.6vw, 40px) clamp(20px, 2.4vw, 36px);
+      align-items: start;
+    }
+
+    .card { background: transparent; }
+    .card.feature { grid-column: 1 / -1; }
+    .card.feature .card-inner {
+      display: grid;
+      grid-template-columns: 1.3fr 1fr;
+      gap: clamp(20px, 3vw, 44px);
+      align-items: center;
+    }
+    .card.feature .card-body { padding-top: 0; }
+    .card.feature h3 { font-size: clamp(1.5rem, 2.6vw, 2.1rem); line-height: 1.08; }
+
+    .media {
+      position: relative;
+      background: var(--ink);
+      border: 1px solid var(--ink);
+      overflow: hidden;
+    }
+
+    /* Video thumbs are now real buttons, so keyboard users can play them */
+    .yt {
+      display: block; position: relative; width: 100%;
+      padding: 0; margin: 0; border: 0; background: var(--ink);
+      cursor: pointer; aspect-ratio: 16 / 9; overflow: hidden;
+    }
+    .yt img {
+      position: absolute; inset: 0; width: 100%; height: 100%;
+      object-fit: cover; transition: transform .45s cubic-bezier(.2,.7,.3,1), opacity .3s;
+    }
+    .yt:hover img { transform: scale(1.035); opacity: .82; }
+    .play {
+      position: absolute; left: 50%; top: 50%;
+      transform: translate(-50%,-50%);
+      width: 62px; height: 62px; border-radius: 50%;
+      background: var(--accent);
+      display: flex; align-items: center; justify-content: center;
+      transition: transform .28s cubic-bezier(.2,.7,.3,1), background .2s;
+    }
+    .yt:hover .play { transform: translate(-50%,-50%) scale(1.09); background: #fff; }
+    .play svg { width: 20px; height: 20px; fill: #fff; margin-left: 3px; transition: fill .2s; }
+    .yt:hover .play svg { fill: var(--ink); }
+    .media iframe { display: block; width: 100%; aspect-ratio: 16/9; border: 0; }
+
+    /* Workflow screenshots: dark canvas, framed, and zoomable.
+       At card width the n8n nodes are unreadable, and they are the proof. */
+    .shots { padding: 10px; display: grid; gap: 10px; }
+    .shot {
+      display: block; width: 100%; height: auto;
+      cursor: zoom-in; background: var(--ink-soft);
+    }
+    .zoom-hint {
+      position: absolute; right: 12px; bottom: 12px;
+      font-family: var(--mono); font-size: 0.66rem;
+      letter-spacing: 0.08em; text-transform: uppercase;
+      color: var(--paper); background: rgba(20,17,14,0.78);
+      border: 1px solid var(--rule-dark);
+      padding: 5px 10px; pointer-events: none;
+      opacity: 0; transition: opacity .22s;
+    }
+    .media:hover .zoom-hint { opacity: 1; }
+
+    .card-body { padding-top: 20px; }
+    .card-type {
+      font-family: var(--mono); font-size: 0.7rem;
+      text-transform: uppercase; letter-spacing: 0.11em;
+      color: var(--accent); margin-bottom: 11px;
+    }
+    .card h3 {
+      font-family: var(--display);
+      font-size: var(--t-h3); font-weight: 700;
+      line-height: 1.2; letter-spacing: -0.02em;
+      margin-bottom: 11px;
+    }
+    .card p { color: var(--ink-2); font-size: 0.95rem; line-height: 1.68; }
+    .tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 16px; }
+    .tag {
+      font-family: var(--mono); font-size: 0.69rem;
+      color: var(--ink-2); border: 1px solid var(--rule);
+      padding: 4px 9px; letter-spacing: 0.02em;
+    }
+    .note {
+      font-family: var(--mono);
+      font-size: 0.68rem; color: var(--ink-2);
+      opacity: .7; margin-top: 13px; letter-spacing: 0.01em;
+    }
+
+    /* ─────────────── TESTIMONIALS ─────────────── */
+    /* Rule-separated columns rather than three boxed cards, because the page already
+       has a card grid directly above this. */
+    .section-lead {
+      color: var(--ink-2); font-size: var(--t-lead);
+      max-width: 52ch; margin-top: 16px; line-height: 1.6;
+    }
+    .quotes {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: clamp(28px, 3vw, 44px);
+    }
+    .quote {
+      border-top: 2px solid var(--ink); padding-top: 22px;
       display: flex; flex-direction: column;
     }
-    .project-card:hover { border-color: var(--gold); transform: translateY(-4px); box-shadow: 0 14px 44px rgba(201,168,76,0.15); }
-
-    /* YouTube embed with real thumbnail */
-    .yt-thumb-wrap {
-      position: relative; width: 100%; padding-top: 56.25%;
-      background: var(--navy3); cursor: pointer; overflow: hidden;
+    .quote blockquote {
+      font-family: var(--display);
+      font-size: clamp(1.0rem, 1.15vw, 1.12rem);
+      font-weight: 500; line-height: 1.52;
+      letter-spacing: -0.012em;
+      text-wrap: pretty;
     }
-    .yt-thumb-wrap img {
-      position: absolute; inset: 0; width: 100%; height: 100%;
-      object-fit: cover; transition: transform 0.3s;
+    /* margin-top:auto pins every attribution to the bottom so they line up
+       across columns of unequal quote length */
+    .quote-by {
+      display: flex; align-items: center; gap: 12px;
+      margin-top: auto; padding-top: 18px;
+      border-top: 1px solid var(--rule);
     }
-    .yt-thumb-wrap:hover img { transform: scale(1.03); }
-    .yt-play-btn {
-      position: absolute; top: 50%; left: 50%;
-      transform: translate(-50%, -50%);
-      width: 56px; height: 56px; border-radius: 50%;
-      background: rgba(201,168,76,0.92);
+    .quote blockquote { margin-bottom: 24px; }
+    .avatar {
+      width: 38px; height: 38px; border-radius: 50%; flex: none;
+      background: var(--ink); color: var(--paper);
       display: flex; align-items: center; justify-content: center;
-      transition: background 0.2s, transform 0.2s;
-      z-index: 2;
+      font-family: var(--mono); font-size: 0.8rem;
     }
-    .yt-thumb-wrap:hover .yt-play-btn { background: var(--gold-lt); transform: translate(-50%, -50%) scale(1.08); }
-    .yt-play-btn svg { width: 22px; height: 22px; fill: var(--navy); margin-left: 3px; }
-
-    /* Iframe (shown after click) */
-    .yt-iframe-wrap {
-      position: absolute; inset: 0; display: none;
+    /* Scoped to .who, because a bare `.quote-by span` also matched the avatar and the
+       wrapper, which blanked the monogram and uppercased the names */
+    .quote-by .who b {
+      display: block; font-size: 0.95rem; font-weight: 600;
+      font-family: var(--body); text-transform: none;
+      letter-spacing: 0; color: var(--ink);
     }
-    .yt-iframe-wrap iframe { width: 100%; height: 100%; border: none; }
-
-    /* Screenshot cards */
-    .wf-screenshot {
-      width: 100%;
-      display: block; background: var(--navy3);
-      object-fit: contain;
+    .quote-by .who i {
+      display: block; font-style: normal;
+      font-family: var(--mono); font-size: 0.65rem;
+      text-transform: uppercase; letter-spacing: 0.1em;
+      color: var(--ink-2);
     }
 
-    .project-body { padding: 22px; flex: 1; display: flex; flex-direction: column; }
-    .project-type {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 0.7rem; color: var(--gold);
-      text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 8px;
+    /* ─────────────── CONTACT ─────────────── */
+    #contact { background: var(--ink); color: var(--paper); }
+    #contact .eyebrow { color: var(--accent); }
+    #contact h2 { max-width: 16ch; margin-bottom: 24px; }
+    .contact-lead {
+      color: rgba(243,240,234,0.68);
+      font-size: var(--t-lead); max-width: 50ch; margin-bottom: 38px; line-height: 1.6;
     }
-    .project-body h3 { font-size: 0.98rem; font-weight: 600; margin-bottom: 10px; line-height: 1.4; color: var(--white); }
-    .project-body p { color: var(--muted); font-size: 0.875rem; line-height: 1.75; flex: 1; }
-    .project-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 14px; }
-    .project-tag {
-      background: rgba(201,168,76,0.08); border: 1px solid var(--border);
-      border-radius: 4px; padding: 3px 10px;
-      font-size: 0.7rem; color: var(--gold-lt);
-      font-family: 'JetBrains Mono', monospace;
+    .contact-btns { display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 46px; }
+    .socials {
+      display: flex; gap: 10px 30px; flex-wrap: wrap;
+      padding-top: 30px; border-top: 1px solid var(--rule-dark);
     }
-    .project-disclaimer { font-size: 0.7rem; color: var(--muted); margin-top: 10px; font-style: italic; opacity: 0.65; }
+    .socials a {
+      display: inline-flex; align-items: center; gap: 9px;
+      text-decoration: none; font-size: 0.9rem; font-weight: 500;
+      color: rgba(243,240,234,0.72);
+      transition: color .18s;
+    }
+    .socials a:hover { color: var(--paper); }
+    .socials svg { width: 17px; height: 17px; flex: none; }
 
-    /* TESTIMONIALS */
-    #testimonials { background: var(--navy2); }
-    .testimonials-coming {
-      border: 1px dashed var(--border); border-radius: 16px;
-      padding: 60px 40px; text-align: center; color: var(--muted);
-    }
-    .testimonials-coming p { font-size: 0.95rem; line-height: 1.9; }
-
-    /* CONTACT */
-    #contact { background: var(--navy); }
-    .contact-wrap { max-width: 620px; margin: 0 auto; text-align: center; }
-    .contact-wrap > p { color: var(--muted); margin-bottom: 36px; font-size: 1rem; line-height: 1.85; }
-    .contact-links { display: flex; flex-wrap: wrap; gap: 12px; justify-content: center; margin-top: 28px; }
-    .contact-link {
-      display: inline-flex; align-items: center; gap: 8px;
-      background: var(--navy2); border: 1px solid var(--border);
-      color: var(--white); text-decoration: none;
-      padding: 11px 20px; border-radius: 10px;
-      font-size: 0.875rem; font-weight: 500;
-      transition: border-color 0.2s, transform 0.15s;
-    }
-    .contact-link:hover { border-color: var(--gold-lt); transform: translateY(-2px); }
-    .contact-link svg { width: 17px; height: 17px; flex-shrink: 0; }
-
-    /* FOOTER */
     footer {
-      background: var(--navy2); border-top: 1px solid var(--border);
-      padding: 26px 6vw;
-      display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px;
+      background: var(--ink); color: rgba(243,240,234,0.45);
+      border-top: 1px solid var(--rule-dark);
+      padding: 24px var(--gutter);
+      font-family: var(--mono); font-size: 0.74rem;
     }
-    footer p { color: var(--muted); font-size: 0.8rem; }
-    .footer-handle { font-family: 'JetBrains Mono', monospace; font-size: 0.8rem; color: var(--gold-lt); }
-
-    @media (max-width: 640px) {
-      .nav-links { display: none; }
-      .projects-grid { grid-template-columns: 1fr; }
-      .why-grid { grid-template-columns: 1fr; }
-      footer { flex-direction: column; text-align: center; }
+    .footer-inner {
+      max-width: var(--maxw); margin: 0 auto;
+      display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap;
     }
 
-    .reveal { opacity: 0; transform: translateY(26px); transition: opacity 0.6s ease, transform 0.6s ease; }
-    .reveal.visible { opacity: 1; transform: none; }
+    /* ─────────────── MOTION ─────────────── */
+    /* Only the work cards and approach rows move, and only once.
+       Scoped to .js so the page is fully readable if the script never runs. */
+    .js .reveal { opacity: 0; transform: translateY(18px); }
+    .js .reveal.in {
+      opacity: 1; transform: none;
+      transition: opacity .65s cubic-bezier(.2,.7,.3,1), transform .65s cubic-bezier(.2,.7,.3,1);
+    }
+
+    /* ─────────────── RESPONSIVE ─────────────── */
+    @media (max-width: 1000px) {
+      .card.feature .card-inner { grid-template-columns: 1fr; }
+      .card.feature .card-body { padding-top: 20px; }
+    }
+    @media (max-width: 900px) {
+      .hero-grid { grid-template-columns: 1fr; align-items: start; }
+      .hero-portrait { max-width: 380px; margin: 0 auto; }
+      .hero-copy { padding-bottom: 0; }
+      .approach-item { grid-template-columns: 56px minmax(0,1fr); }
+      .approach-item p { grid-column: 2; }
+    }
+    @media (max-width: 860px) {
+      .nav-links, .nav-right .btn { display: none; }
+      .nav-toggle { display: flex; }
+    }
+    @media (max-width: 860px) {
+      .quotes { grid-template-columns: 1fr; gap: 0; }
+      .quote { border-top-width: 1px; padding: 26px 0; }
+      .quote:first-child { border-top: 2px solid var(--ink); }
+    }
+    @media (max-width: 700px) {
+      .grid { grid-template-columns: 1fr; }
+      .footer-inner { flex-direction: column; }
+      .zoom-hint { opacity: 1; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      *, *::before, *::after {
+        animation-duration: .001ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: .001ms !important;
+      }
+      .reveal { opacity: 1 !important; transform: none !important; }
+    }
   </style>
+  <script>document.documentElement.classList.add('js');</script>
 </head>
 <body>
 
-<nav>
-  <a class="nav-logo" href="#">automatewithdebby</a>
-  <ul class="nav-links">
-    <li><a href="#why">Why Me</a></li>
-    <li><a href="#projects">Projects</a></li>
-    <li><a href="#contact">Contact</a></li>
-  </ul>
-  <a class="nav-cta" href="https://calendly.com/odiondebby95/30min" target="_blank">Book a Free Call</a>
-</nav>
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="nav">
+  <div class="nav-inner">
+    <a class="nav-logo" href="#">automatewith<b>debby</b></a>
+    <div class="nav-right">
+      <nav aria-label="Primary">
+        <ul class="nav-links">
+          <li><a href="#approach">Approach</a></li>
+          <li><a href="#work">Work</a></li>
+          <li><a href="#praise">References</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </nav>
+      <a class="btn btn-solid btn-sm" href="https://calendly.com/odiondebby95/30min" target="_blank" rel="noopener noreferrer">Book a call</a>
+      <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="navPanel" aria-label="Open menu">
+        <span class="bar"></span><span class="bar"></span>
+      </button>
+    </div>
+  </div>
+  <div class="nav-panel" id="navPanel">
+    <ul>
+      <li><a href="#approach">Approach</a></li>
+      <li><a href="#work">Work</a></li>
+      <li><a href="#praise">References</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+    <a class="btn btn-solid" href="https://calendly.com/odiondebby95/30min" target="_blank" rel="noopener noreferrer">Book a free call</a>
+  </div>
+</header>
+
+<main id="main">
 
 <section id="hero">
-  <div class="hero-photo-wrap">
-    <div class="hero-photo-ring"></div>
-    <div class="hero-photo-ring2"></div>
-    <img class="hero-photo" src="deborah-photo.png" alt="Deborah Odion" />
-  </div>
-  <div class="available-pill"><span class="dot"></span> Available for new projects</div>
-  <h1>Deborah Odion</h1>
-  <p class="hero-handle">@automatewithdebby</p>
-  <p class="hero-tagline">AI Automation Specialist · Turning Manual Work Into Smart Systems</p>
-  <p class="hero-bio">I Help Businesses Eliminate Manual Work &amp; Scale With AI Automation — from voice receptionists and AI chatbots to lead generation engines and smart email workflows, I build it end to end.</p>
-  <div class="hero-btns">
-    <a class="btn-primary" href="https://calendly.com/odiondebby95/30min" target="_blank">Book a Free Call</a>
-    <a class="btn-secondary" href="#projects">View My Work</a>
+  <div class="hero-grid">
+    <div class="hero-copy">
+      <p class="status"><i></i> Available for new projects</p>
+      <h1>
+        <span class="h1-name">Deborah Odion · AI Automation Specialist</span>
+        <span class="h1-stmt">I turn manual work into systems that <em>run themselves</em>.</span>
+      </h1>
+      <p class="hero-bio">
+        Voice receptionists, chatbots, lead generation engines and smart email workflows.
+        Designed, built and handed over end to end.
+      </p>
+      <div class="hero-btns">
+        <a class="btn btn-solid" href="https://calendly.com/odiondebby95/30min" target="_blank" rel="noopener noreferrer">Book a free call</a>
+        <a class="btn btn-line" href="#work">See the work</a>
+      </div>
+    </div>
+    <div class="hero-portrait">
+      <img src="deborah-photo.png" alt="Deborah Odion" width="864" height="1180" fetchpriority="high" />
+    </div>
   </div>
 </section>
 
-<div class="stack-strip">
-  <span class="stack-label">Tech Stack</span>
-  <span class="stack-tag">n8n</span>
-  <span class="stack-tag">Zapier</span>
-  <span class="stack-tag">Vapi</span>
-  <span class="stack-tag">ElevenLabs</span>
-  <span class="stack-tag">Voiceflow</span>
-  <span class="stack-tag">Lovable</span>
-  <span class="stack-tag">OpenAI</span>
-  <span class="stack-tag">Airtable</span>
+<div class="stack">
+  <div class="stack-inner">
+    <span class="stack-label">Stack</span>
+    <div class="stack-list">
+      <span>n8n</span><span>Zapier</span><span>Vapi</span><span>ElevenLabs</span>
+      <span>Voiceflow</span><span>Lovable</span><span>OpenAI</span><span>Airtable</span><span>Supabase</span>
+    </div>
+  </div>
 </div>
 
-<section id="why">
-  <div class="section-label">Why Work With Me</div>
-  <h2 class="section-title">Not just workflows.<br /><span>Smart systems.</span></h2>
-  <div class="why-grid">
-    <div class="why-card reveal">
-      <div class="why-icon">⚡</div>
-      <h3>I Build Systems, Not Just Workflows</h3>
-      <p>I design end-to-end automation systems that solve real business problems — from the first trigger to the final output.</p>
+<section id="approach">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">Approach</span>
+      <h2>How I work</h2>
     </div>
-    <div class="why-card reveal">
-      <div class="why-icon">🎯</div>
-      <h3>I Understand Business, Not Just Tech</h3>
-      <p>Every automation I build is tied to a business outcome — more revenue, less manual work, faster response times, better customer experience.</p>
-    </div>
-    <div class="why-card reveal">
-      <div class="why-icon">🛠️</div>
-      <h3>I Work Across the Full Stack</h3>
-      <p>Vapi · ElevenLabs · Voiceflow · n8n · Zapier · Lovable — I pick the right tool for your problem, not the one I'm most comfortable with.</p>
-    </div>
-    <div class="why-card reveal">
-      <div class="why-icon">🤝</div>
-      <h3>I Keep You in the Loop</h3>
-      <p>No black boxes. I walk you through every system I build so your team can understand, use, and grow with it.</p>
-    </div>
-    <div class="why-card reveal">
-      <div class="why-icon">🚀</div>
-      <h3>I Deliver and Move Fast</h3>
-      <p>I know your time is money. I work with urgency, communicate clearly, and deliver systems that work from day one.</p>
-    </div>
-    <div class="why-card reveal">
-      <div class="why-icon">🔄</div>
-      <h3>Systems That Scale With You</h3>
-      <p>I build with growth in mind. As your business expands, the systems I build expand with you — no need to rebuild from scratch.</p>
+
+    <div class="approach">
+      <!-- TODO Debby: the strongest version of point 01 is a real before/after
+           number from a real build, e.g. "cut lead response from X to Y".
+           Add it as a second sentence when you have one you can stand behind. -->
+      <div class="approach-item reveal">
+        <div class="approach-num">01</div>
+        <h3>Systems, not workflows</h3>
+        <p>A workflow moves data between two apps. A system covers the whole path: first trigger to final output, including what happens when something fails, when a human needs to step in, and when the volume doubles.</p>
+      </div>
+
+      <div class="approach-item reveal">
+        <div class="approach-num">02</div>
+        <h3>The right tool, not my favourite one</h3>
+        <p>Vapi, ElevenLabs, Voiceflow, n8n, Zapier. Voice AI and chat are not the same problem, and neither is a nightly batch job. I pick per problem, and I tell you why, including when the answer is that you don't need automation at all.</p>
+      </div>
+
+      <div class="approach-item reveal">
+        <div class="approach-num">03</div>
+        <h3>No black boxes</h3>
+        <p>Every build comes with a walkthrough of how it works and where to change it. If you can't run it without me, I haven't finished the job.</p>
+      </div>
     </div>
   </div>
 </section>
 
-<section id="projects">
-  <div class="section-label">Portfolio</div>
-  <h2 class="section-title">Real builds.<br /><span>Real results.</span></h2>
-  <div class="projects-filter">
-    <button class="filter-btn active" data-filter="all">All Projects</button>
-    <button class="filter-btn" data-filter="video">Video Demos</button>
-    <button class="filter-btn" data-filter="screenshot">Workflow Builds</button>
-  </div>
-  <div class="projects-grid">
-
-    <!-- 1. AI SDR (video) -->
-    <div class="project-card reveal" data-type="video">
-      <div class="yt-thumb-wrap" onclick="playVideo(this, 'd1v5IE8SKIw')">
-        <img src="https://img.youtube.com/vi/d1v5IE8SKIw/maxresdefault.jpg" alt="AI SDR Lead Generation System" loading="lazy" />
-        <div class="yt-play-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
-        <div class="yt-iframe-wrap"></div>
-      </div>
-      <div class="project-body">
-        <div class="project-type">Video Demo · Sales Automation</div>
-        <h3>AI SDR &amp; Lead Generation System | n8n + Airtable + Apify + OpenAI</h3>
-        <p>A fully automated AI SDR system using n8n and Airtable as the CRM. Scrapes leads from Google Maps, LinkedIn &amp; Apollo, enriches and scores them with AI, then sends personalized outreach daily — all on autopilot across 3 workflows.</p>
-        <div class="project-tags">
-          <span class="project-tag">n8n</span><span class="project-tag">Airtable</span>
-          <span class="project-tag">Apify</span><span class="project-tag">OpenAI</span><span class="project-tag">Gmail</span>
-        </div>
-        <p class="project-disclaimer">All data shown is sample/demo data only. No real client information is disclosed.</p>
-      </div>
+<section id="work">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">Selected work</span>
+      <h2>Eleven builds, start to finish</h2>
     </div>
 
-    <!-- 2. Speed to Lead (screenshot) -->
-    <div class="project-card reveal" data-type="screenshot">
-      <img class="wf-screenshot" src="wf-speed-lead.jpeg" alt="Speed to Lead Real Estate Workflow" loading="lazy" />
-      <div class="project-body">
-        <div class="project-type">Workflow Build · Real Estate</div>
-        <h3>Speed to Lead — Real Estate</h3>
-        <p>When a lead fills a Google Form, the system instantly checks budget, sends priority email to hot leads, alerts the agent for high-budget prospects, and logs everything in a Lead Tracker sheet automatically. Fast response, prioritized leads, organized tracking.</p>
-        <div class="project-tags">
-          <span class="project-tag">n8n</span><span class="project-tag">Google Sheets</span><span class="project-tag">Gmail</span>
-        </div>
-        <p class="project-disclaimer">All data shown is sample/demo data only.</p>
-      </div>
+    <div class="filters" role="group" aria-label="Filter projects">
+      <button class="filter-btn" data-filter="all" aria-pressed="true">All</button>
+      <button class="filter-btn" data-filter="video" aria-pressed="false">Video demos</button>
+      <button class="filter-btn" data-filter="screenshot" aria-pressed="false">Workflow builds</button>
     </div>
 
-    <!-- 3. ElevenLabs Real Estate (video) -->
-    <div class="project-card reveal" data-type="video">
-      <div class="yt-thumb-wrap" onclick="playVideo(this, '5k66Pg5G5iA')">
-        <img src="https://img.youtube.com/vi/5k66Pg5G5iA/maxresdefault.jpg" alt="AI Inbound Receptionist Real Estate ElevenLabs" loading="lazy" />
-        <div class="yt-play-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
-        <div class="yt-iframe-wrap"></div>
-      </div>
-      <div class="project-body">
-        <div class="project-type">Video Demo · Voice AI · Real Estate</div>
-        <h3>AI Inbound Receptionist for Real Estate | ElevenLabs + n8n Automation</h3>
-        <p>An AI-powered inbound receptionist for a real estate company using ElevenLabs Conversational AI and n8n. Answers calls naturally, handles buyer, renter and seller inquiries, books viewings, creates calendar events, sends confirmations and generates end-of-call summaries.</p>
-        <div class="project-tags">
-          <span class="project-tag">ElevenLabs</span><span class="project-tag">n8n</span>
-          <span class="project-tag">Google Calendar</span><span class="project-tag">Gmail</span><span class="project-tag">Webhooks</span>
-        </div>
-      </div>
-    </div>
+    <div class="grid" id="grid">
 
-    <!-- 4. HubSpot Xero (screenshot) -->
-    <div class="project-card reveal" data-type="screenshot">
-      <img class="wf-screenshot" src="wf-hubspot-xero.jpg" alt="Closed Won Deal Auto Invoice HubSpot Xero" loading="lazy" />
-      <div class="project-body">
-        <div class="project-type">Workflow Build · CRM · Finance</div>
-        <h3>Closed Won Deal → Auto Invoice | HubSpot + Xero</h3>
-        <p>When a deal is marked Closed Won in HubSpot, this workflow fetches contact details, applies the correct pricing plan (Starter, Standard or Premium), checks for existing Xero contacts and invoices, creates the invoice, generates a PDF, sends it to the client, updates the deal and notifies the team — instantly.</p>
-        <div class="project-tags">
-          <span class="project-tag">n8n</span><span class="project-tag">HubSpot</span>
-          <span class="project-tag">Xero</span><span class="project-tag">Gmail</span>
+      <!-- 1. AI SDR (featured) -->
+      <article class="card feature reveal" data-type="video">
+        <div class="card-inner">
+          <div class="media">
+            <button class="yt" data-video="d1v5IE8SKIw" aria-label="Play video: AI SDR and Lead Generation System">
+              <img src="https://img.youtube.com/vi/d1v5IE8SKIw/maxresdefault.jpg" alt="" loading="eager" />
+              <span class="play"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></span>
+            </button>
+          </div>
+          <div class="card-body">
+            <div class="card-type">Video demo · Sales automation</div>
+            <h3>AI SDR &amp; lead generation system</h3>
+            <p>A fully automated AI SDR using n8n with Airtable as the CRM. Scrapes leads from Google Maps, LinkedIn and Apollo, enriches and scores them with AI, then sends personalised outreach daily across three workflows, on autopilot.</p>
+            <div class="tags">
+              <span class="tag">n8n</span><span class="tag">Airtable</span><span class="tag">Apify</span><span class="tag">OpenAI</span><span class="tag">Gmail</span>
+            </div>
+            <p class="note">Sample data only. No client information shown.</p>
+          </div>
         </div>
-        <p class="project-disclaimer">All data shown is sample/demo data only.</p>
-      </div>
-    </div>
+      </article>
 
-    <!-- 5. Vapi Dental (video) -->
-    <div class="project-card reveal" data-type="video">
-      <div class="yt-thumb-wrap" onclick="playVideo(this, '46SSd3PQI7o')">
-        <img src="https://img.youtube.com/vi/46SSd3PQI7o/maxresdefault.jpg" alt="AI Voice Receptionist Dental Clinic Vapi" loading="lazy" />
-        <div class="yt-play-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
-        <div class="yt-iframe-wrap"></div>
-      </div>
-      <div class="project-body">
-        <div class="project-type">Video Demo · Voice AI · Healthcare</div>
-        <h3>AI Voice Receptionist for Dental Clinics | Vapi + n8n Automation</h3>
-        <p>An AI voice receptionist for dental clinics built with Vapi + n8n + OpenAI. Answers patient calls professionally, checks availability, books appointments, creates Google Calendar events, sends confirmation emails and generates end-of-call reports — eliminating all manual admin work.</p>
-        <div class="project-tags">
-          <span class="project-tag">Vapi</span><span class="project-tag">n8n</span>
-          <span class="project-tag">OpenAI</span><span class="project-tag">Google Calendar</span><span class="project-tag">Gmail</span>
+      <!-- 2. Speed to Lead -->
+      <article class="card reveal" data-type="screenshot">
+        <div class="media">
+          <div class="shots">
+            <img class="shot" data-zoomable src="wf-speed-lead.jpeg" alt="Speed to Lead real estate workflow in n8n" loading="lazy" />
+          </div>
+          <span class="zoom-hint">Click to enlarge</span>
         </div>
-      </div>
-    </div>
-
-    <!-- 6. Content Pipeline (screenshot) -->
-    <div class="project-card reveal" data-type="screenshot">
-      <img class="wf-screenshot" src="wf-content-main.jpeg" alt="Weekly AI Content Generation Pipeline - Main Workflow" loading="lazy" />
-      <img class="wf-screenshot" src="wf-content-sub.jpeg" alt="Weekly AI Content Generation Pipeline - Subworkflow" loading="lazy" />
-      <div class="project-body">
-        <div class="project-type">Workflow Build · Content Automation</div>
-        <h3>Weekly AI Content Generation Pipeline</h3>
-        <p>Runs every Friday at 4pm. Fetches next week's theme from Airtable, pulls active content types for Monday, Tuesday and Thursday, searches the last 52 posts to avoid repeating angles, generates unique copy and images via Templated, and schedules everything to Buffer. Three content types, three days, zero manual work.</p>
-        <div class="project-tags">
-          <span class="project-tag">n8n</span><span class="project-tag">Airtable</span>
-          <span class="project-tag">OpenAI</span><span class="project-tag">Templated</span><span class="project-tag">Buffer</span>
+        <div class="card-body">
+          <div class="card-type">Workflow build · Real estate</div>
+          <h3>Speed to lead for real estate</h3>
+          <p>A lead fills a Google Form and the system instantly checks budget, emails hot leads first, alerts the agent on high-budget prospects, and logs everything to a lead tracker. Fast response, prioritised leads, organised tracking.</p>
+          <div class="tags">
+            <span class="tag">n8n</span><span class="tag">Google Sheets</span><span class="tag">Gmail</span>
+          </div>
+          <p class="note">Sample data only.</p>
         </div>
-        <p class="project-disclaimer">All data shown is sample/demo data only.</p>
-      </div>
-    </div>
+      </article>
 
-    <!-- 7. Customer Support (video) -->
-    <div class="project-card reveal" data-type="video">
-      <div class="yt-thumb-wrap" onclick="playVideo(this, 'rJYf-Iq5FI0')">
-        <img src="https://img.youtube.com/vi/rJYf-Iq5FI0/maxresdefault.jpg" alt="AI Customer Support Email Live Chat" loading="lazy" />
-        <div class="yt-play-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
-        <div class="yt-iframe-wrap"></div>
-      </div>
-      <div class="project-body">
-        <div class="project-type">Video Demo · AI Support · Multi-channel</div>
-        <h3>AI Customer Support System for Email &amp; Live Chat | n8n + OpenAI + Pinecone</h3>
-        <p>A multi-channel AI customer support workflow in n8n handling both email and live website chat from a single system. Receives messages from Gmail and live chat, classifies and prioritizes them, generates accurate draft responses from 1,500+ knowledge base points, routes urgent issues to a human agent and logs every interaction.</p>
-        <div class="project-tags">
-          <span class="project-tag">n8n</span><span class="project-tag">OpenAI</span>
-          <span class="project-tag">Pinecone</span><span class="project-tag">Gmail</span><span class="project-tag">RAG</span>
+      <!-- 3. ElevenLabs Real Estate -->
+      <article class="card reveal" data-type="video">
+        <div class="media">
+          <button class="yt" data-video="5k66Pg5G5iA" aria-label="Play video: AI inbound receptionist for real estate">
+            <img src="https://img.youtube.com/vi/5k66Pg5G5iA/maxresdefault.jpg" alt="" loading="lazy" />
+            <span class="play"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></span>
+          </button>
         </div>
-      </div>
-    </div>
-
-    <!-- 8. LinkedIn Scraper (screenshot) -->
-    <div class="project-card reveal" data-type="screenshot">
-      <img class="wf-screenshot" src="wf-linkedin-scraper.jpg" alt="LinkedIn Post Scraper Enrichment" loading="lazy" />
-      <div class="project-body">
-        <div class="project-type">Workflow Build · Lead Enrichment</div>
-        <h3>LinkedIn Post Scraper &amp; Enrichment</h3>
-        <p>Reads up to 101 leads from Google Sheets, processes 10 per run, scrapes up to 5 recent LinkedIn posts per lead using Apify, formats and structures all post data with JavaScript, and updates the same sheet automatically. Built for sales teams who want LinkedIn context before reaching out.</p>
-        <div class="project-tags">
-          <span class="project-tag">n8n</span><span class="project-tag">Google Sheets</span><span class="project-tag">Apify</span>
+        <div class="card-body">
+          <div class="card-type">Video demo · Voice AI · Real estate</div>
+          <h3>AI inbound receptionist for real estate</h3>
+          <p>Built on ElevenLabs Conversational AI and n8n. Answers calls naturally, handles buyer, renter and seller enquiries, books viewings, creates calendar events, sends confirmations and generates end-of-call summaries.</p>
+          <div class="tags">
+            <span class="tag">ElevenLabs</span><span class="tag">n8n</span><span class="tag">Google Calendar</span><span class="tag">Gmail</span><span class="tag">Webhooks</span>
+          </div>
         </div>
-        <p class="project-disclaimer">All data shown is sample/demo data only.</p>
-      </div>
-    </div>
+      </article>
 
-    <!-- 9. Gemini Email (video) -->
-    <div class="project-card reveal" data-type="video">
-      <div class="yt-thumb-wrap" onclick="playVideo(this, '27wuvpmtZds')">
-        <img src="https://img.youtube.com/vi/27wuvpmtZds/maxresdefault.jpg" alt="AI Email Assistant Gemini Supabase" loading="lazy" />
-        <div class="yt-play-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
-        <div class="yt-iframe-wrap"></div>
-      </div>
-      <div class="project-body">
-        <div class="project-type">Video Demo · Email AI · Healthcare</div>
-        <h3>AI Email Assistant | n8n + Gemini + Supabase RAG</h3>
-        <p>An AI-powered email drafting system for Counseling Wise, a digital agency supporting therapists for 18 years. Triggers the moment a new client email arrives, filters out no-replies, searches 3,000+ past email responses instantly and drafts accurate replies using Google Gemini — saved directly to Gmail for human review before sending.</p>
-        <div class="project-tags">
-          <span class="project-tag">n8n</span><span class="project-tag">Google Gemini</span>
-          <span class="project-tag">Supabase</span><span class="project-tag">Gmail</span><span class="project-tag">RAG</span>
+      <!-- 4. HubSpot Xero -->
+      <article class="card reveal" data-type="screenshot">
+        <div class="media">
+          <div class="shots">
+            <img class="shot" data-zoomable src="wf-hubspot-xero.jpg" alt="Closed-won deal to auto invoice workflow, HubSpot and Xero" loading="lazy" />
+          </div>
+          <span class="zoom-hint">Click to enlarge</span>
         </div>
-      </div>
-    </div>
-
-    <!-- 10. Loan Extractor (screenshot) -->
-    <div class="project-card reveal" data-type="screenshot">
-      <img class="wf-screenshot" src="wf-loan-extractor.jpg" alt="Loan Application Document Extractor" loading="lazy" />
-      <div class="project-body">
-        <div class="project-type">Workflow Build · Document Automation · Finance</div>
-        <h3>Loan Application Document Extractor</h3>
-        <p>Monitors Gmail for incoming loan application emails, checks whether the email contains loan documents or application details to filter out spam, detects attachments, creates an organized folder in Google Drive and uploads all documents automatically. Zero manual document handling for loan processing teams.</p>
-        <div class="project-tags">
-          <span class="project-tag">n8n</span><span class="project-tag">Gmail</span><span class="project-tag">Google Drive</span>
+        <div class="card-body">
+          <div class="card-type">Workflow build · CRM · Finance</div>
+          <h3>Closed-won deal → auto invoice</h3>
+          <p>When a deal hits Closed Won in HubSpot, the system fetches contact details, applies the right pricing plan, checks for existing Xero contacts and invoices, creates the invoice, generates a PDF, sends it, updates the deal and notifies the team.</p>
+          <div class="tags">
+            <span class="tag">n8n</span><span class="tag">HubSpot</span><span class="tag">Xero</span><span class="tag">Gmail</span>
+          </div>
+          <p class="note">Sample data only.</p>
         </div>
-        <p class="project-disclaimer">All data shown is sample/demo data only.</p>
-      </div>
-    </div>
+      </article>
 
-    <!-- 11. Voiceflow Nova (video) -->
-    <div class="project-card reveal" data-type="video">
-      <div class="yt-thumb-wrap" onclick="playVideo(this, 'pgZlblg41sM')">
-        <img src="https://img.youtube.com/vi/pgZlblg41sM/maxresdefault.jpg" alt="Nova AI Property Consultant Voiceflow" loading="lazy" />
-        <div class="yt-play-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
-        <div class="yt-iframe-wrap"></div>
-      </div>
-      <div class="project-body">
-        <div class="project-type">Video Demo · Chatbot · Real Estate</div>
-        <h3>AI Property Consultant Chatbot for Real Estate | Voiceflow + n8n</h3>
-        <p>Nova is an AI property consultant chatbot built in Voiceflow for a real estate agency. Answers property inquiries instantly, searches and recommends properties to buyers, captures and organizes lead information, books appointments automatically and escalates urgent conversations to a human agent. Ready to embed on any website with a simple code snippet.</p>
-        <div class="project-tags">
-          <span class="project-tag">Voiceflow</span><span class="project-tag">n8n</span><span class="project-tag">Lead Capture</span>
+      <!-- 5. Vapi Dental -->
+      <article class="card reveal" data-type="video">
+        <div class="media">
+          <button class="yt" data-video="46SSd3PQI7o" aria-label="Play video: AI voice receptionist for dental clinics">
+            <img src="https://img.youtube.com/vi/46SSd3PQI7o/maxresdefault.jpg" alt="" loading="lazy" />
+            <span class="play"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></span>
+          </button>
         </div>
-      </div>
-    </div>
+        <div class="card-body">
+          <div class="card-type">Video demo · Voice AI · Healthcare</div>
+          <h3>AI voice receptionist for dental clinics</h3>
+          <p>Vapi, n8n and OpenAI. Answers patient calls, checks availability, books appointments, creates calendar events, sends confirmations and generates end-of-call reports, removing the manual admin entirely.</p>
+          <div class="tags">
+            <span class="tag">Vapi</span><span class="tag">n8n</span><span class="tag">OpenAI</span><span class="tag">Google Calendar</span><span class="tag">Gmail</span>
+          </div>
+        </div>
+      </article>
 
+      <!-- 6. Content Pipeline -->
+      <article class="card reveal" data-type="screenshot">
+        <div class="media">
+          <div class="shots">
+            <img class="shot" data-zoomable src="wf-content-main.jpeg" alt="Weekly AI content generation pipeline, main workflow" loading="lazy" />
+            <img class="shot" data-zoomable src="wf-content-sub.jpeg" alt="Weekly AI content generation pipeline, subworkflow" loading="lazy" />
+          </div>
+          <span class="zoom-hint">Click to enlarge</span>
+        </div>
+        <div class="card-body">
+          <div class="card-type">Workflow build · Content automation</div>
+          <h3>Weekly AI content pipeline</h3>
+          <p>Runs every Friday at 4pm. Pulls next week's theme from Airtable, checks the last 52 posts so angles never repeat, generates copy and images via Templated, and schedules everything to Buffer. Three content types, three days, zero manual work.</p>
+          <div class="tags">
+            <span class="tag">n8n</span><span class="tag">Airtable</span><span class="tag">OpenAI</span><span class="tag">Templated</span><span class="tag">Buffer</span>
+          </div>
+          <p class="note">Sample data only.</p>
+        </div>
+      </article>
+
+      <!-- 7. Customer Support -->
+      <article class="card reveal" data-type="video">
+        <div class="media">
+          <button class="yt" data-video="rJYf-Iq5FI0" aria-label="Play video: AI customer support system for email and live chat">
+            <img src="https://img.youtube.com/vi/rJYf-Iq5FI0/maxresdefault.jpg" alt="" loading="lazy" />
+            <span class="play"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></span>
+          </button>
+        </div>
+        <div class="card-body">
+          <div class="card-type">Video demo · AI support · Multi-channel</div>
+          <h3>AI customer support for email &amp; live chat</h3>
+          <p>One n8n system handling both inboxes and website chat. Classifies and prioritises incoming messages, drafts accurate responses from a 1,500-point knowledge base, routes urgent issues to a human, and logs every interaction.</p>
+          <div class="tags">
+            <span class="tag">n8n</span><span class="tag">OpenAI</span><span class="tag">Pinecone</span><span class="tag">Gmail</span><span class="tag">RAG</span>
+          </div>
+        </div>
+      </article>
+
+      <!-- 8. LinkedIn Scraper -->
+      <article class="card reveal" data-type="screenshot">
+        <div class="media">
+          <div class="shots">
+            <img class="shot" data-zoomable src="wf-linkedin-scraper.jpg" alt="LinkedIn post scraper and enrichment workflow" loading="lazy" />
+          </div>
+          <span class="zoom-hint">Click to enlarge</span>
+        </div>
+        <div class="card-body">
+          <div class="card-type">Workflow build · Lead enrichment</div>
+          <h3>LinkedIn post scraper &amp; enrichment</h3>
+          <p>Reads up to 101 leads from Google Sheets, processes 10 per run, scrapes up to 5 recent LinkedIn posts per lead via Apify, structures the data in JavaScript and writes it back to the same sheet. For sales teams who want context before they reach out.</p>
+          <div class="tags">
+            <span class="tag">n8n</span><span class="tag">Google Sheets</span><span class="tag">Apify</span>
+          </div>
+          <p class="note">Sample data only.</p>
+        </div>
+      </article>
+
+      <!-- 9. Gemini Email -->
+      <article class="card reveal" data-type="video">
+        <div class="media">
+          <button class="yt" data-video="27wuvpmtZds" aria-label="Play video: AI email assistant with Gemini and Supabase">
+            <img src="https://img.youtube.com/vi/27wuvpmtZds/maxresdefault.jpg" alt="" loading="lazy" />
+            <span class="play"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></span>
+          </button>
+        </div>
+        <div class="card-body">
+          <div class="card-type">Video demo · Email AI · Healthcare</div>
+          <h3>AI email assistant</h3>
+          <p>Built for a digital agency supporting therapists. Fires the moment a client email lands, filters no-replies, searches 3,000+ past responses and drafts a reply with Gemini, saved straight to Gmail for a human to review before it sends.</p>
+          <div class="tags">
+            <span class="tag">n8n</span><span class="tag">Google Gemini</span><span class="tag">Supabase</span><span class="tag">Gmail</span><span class="tag">RAG</span>
+          </div>
+        </div>
+      </article>
+
+      <!-- 10. Loan Extractor -->
+      <article class="card reveal" data-type="screenshot">
+        <div class="media">
+          <div class="shots">
+            <img class="shot" data-zoomable src="wf-loan-extractor.jpg" alt="Loan application document extractor workflow" loading="lazy" />
+          </div>
+          <span class="zoom-hint">Click to enlarge</span>
+        </div>
+        <div class="card-body">
+          <div class="card-type">Workflow build · Documents · Finance</div>
+          <h3>Loan application document extractor</h3>
+          <p>Watches Gmail for loan applications, checks whether the email actually contains documents or application details to filter spam, detects attachments, creates an organised Drive folder and uploads everything. Zero manual document handling.</p>
+          <div class="tags">
+            <span class="tag">n8n</span><span class="tag">Gmail</span><span class="tag">Google Drive</span>
+          </div>
+          <p class="note">Sample data only.</p>
+        </div>
+      </article>
+
+      <!-- 11. Voiceflow Nova -->
+      <article class="card reveal" data-type="video">
+        <div class="media">
+          <button class="yt" data-video="pgZlblg41sM" aria-label="Play video: AI property consultant chatbot built in Voiceflow">
+            <img src="https://img.youtube.com/vi/pgZlblg41sM/maxresdefault.jpg" alt="" loading="lazy" />
+            <span class="play"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></span>
+          </button>
+        </div>
+        <div class="card-body">
+          <div class="card-type">Video demo · Chatbot · Real estate</div>
+          <h3>Nova, an AI property consultant</h3>
+          <p>A Voiceflow chatbot for a real estate agency. Answers property enquiries, recommends listings to buyers, captures lead details, books appointments and escalates urgent conversations to a human. Embeds on any site with one snippet.</p>
+          <div class="tags">
+            <span class="tag">Voiceflow</span><span class="tag">n8n</span><span class="tag">Lead capture</span>
+          </div>
+        </div>
+      </article>
+
+    </div>
   </div>
 </section>
 
-<section id="testimonials">
-  <div class="section-label">Client Love</div>
-  <h2 class="section-title">What clients <span>say</span></h2>
-  <div class="testimonials-coming reveal">
-    <p>Testimonials coming soon — currently collecting feedback from clients.<br /><br />
-    In the meantime, <a href="#projects" style="color:var(--gold-lt)">explore the work above</a> or <a href="https://calendly.com/odiondebby95/30min" target="_blank" style="color:var(--gold)">book a free call</a> to discuss your project.</p>
+<section id="praise">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">References</span>
+      <h2>What people say</h2>
+      <p class="section-lead">Word-for-word recommendations from collaborators and project partners.</p>
+    </div>
+
+    <div class="quotes">
+      <figure class="quote reveal">
+        <blockquote>“Working with Deborah was a great experience. She consistently brought creative ideas, strong organisation, and attention to detail to our social media management. Her ability to plan engaging content while maintaining brand consistency made a noticeable impact on our online presence. She is reliable, proactive, and easy to collaborate with.”</blockquote>
+        <figcaption class="quote-by">
+          <span class="avatar" aria-hidden="true">M</span>
+          <span class="who"><b>Mischa</b><i>Collaborator &amp; partner</i></span>
+        </figcaption>
+      </figure>
+
+      <figure class="quote reveal">
+        <blockquote>“Deborah is highly skilled in social media management and content strategy. She brings structure, creativity, and consistency to every project she handles. Her ability to understand brand messaging and translate it into engaging content helped improve our online presence and audience interaction. She is dependable, detail-oriented, and always committed to delivering quality work.”</blockquote>
+        <figcaption class="quote-by">
+          <span class="avatar" aria-hidden="true">S</span>
+          <span class="who"><b>Success</b><i>Collaborator &amp; partner</i></span>
+        </figcaption>
+      </figure>
+
+      <figure class="quote reveal">
+        <blockquote>“Deborah demonstrated excellent social media management and content planning skills while working with us. She understands audience engagement and knows how to translate brand goals into effective content strategies. Her professionalism, creativity, and dedication make her a valuable asset to any brand looking to grow its digital presence.”</blockquote>
+        <figcaption class="quote-by">
+          <span class="avatar" aria-hidden="true">G</span>
+          <span class="who"><b>Grace</b><i>Collaborator &amp; partner</i></span>
+        </figcaption>
+      </figure>
+    </div>
   </div>
 </section>
 
-<section id="contact">
-  <div class="contact-wrap">
-    <div class="section-label">Get In Touch</div>
-    <h2 class="section-title">Ready to <span>automate</span><br />your business?</h2>
-    <p>Let's talk about what's slowing your team down and build a system that handles it — so you can focus on growing.</p>
-    <div class="hero-btns" style="justify-content:center;margin-bottom:16px;">
-      <a class="btn-primary" href="https://calendly.com/odiondebby95/30min" target="_blank">Book a Free Call</a>
-      <a class="btn-secondary" href="mailto:odiondebby95@gmail.com">Send an Email</a>
+<section id="contact" class="on-dark">
+  <div class="wrap">
+    <span class="eyebrow">Contact</span>
+    <h2 style="margin-top:14px">Tell me what's slowing your team down.</h2>
+    <p class="contact-lead">
+      Book a free 30-minute call. We'll look at the work that eats your week and I'll tell you
+      straight whether it's worth automating.
+    </p>
+    <div class="contact-btns">
+      <a class="btn btn-solid" href="https://calendly.com/odiondebby95/30min" target="_blank" rel="noopener noreferrer">Book a free call</a>
+      <a class="btn btn-line" href="mailto:odiondebby95@gmail.com">odiondebby95@gmail.com</a>
     </div>
-    <div class="contact-links">
-      <a class="contact-link" href="https://www.linkedin.com/in/deborah-odion-3821232a4" target="_blank">
-        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+    <div class="socials">
+      <a href="https://www.linkedin.com/in/deborah-odion-3821232a4" target="_blank" rel="noopener noreferrer">
+        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
         LinkedIn
       </a>
-      <a class="contact-link" href="https://youtube.com/@odiondebby" target="_blank">
-        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M23.498 6.186a3.016 3.016 0 00-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 00.502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 002.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 002.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+      <a href="https://youtube.com/@odiondebby" target="_blank" rel="noopener noreferrer">
+        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M23.498 6.186a3.016 3.016 0 00-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 00.502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 002.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 002.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
         YouTube
       </a>
-      <a class="contact-link" href="https://www.tiktok.com/@debbychella" target="_blank">
-        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z"/></svg>
+      <a href="https://www.tiktok.com/@debbychella" target="_blank" rel="noopener noreferrer">
+        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z"/></svg>
         TikTok
       </a>
     </div>
   </div>
 </section>
 
+</main>
+
 <footer>
-  <p>© 2026 Deborah Odion. All rights reserved.</p>
-  <span class="footer-handle">@automatewithdebby</span>
+  <div class="footer-inner">
+    <p>&copy; <span id="year">2026</span> Deborah Odion</p>
+    <p>automatewithdebby</p>
+  </div>
 </footer>
 
+<!-- medium-zoom: makes the n8n screenshots readable. If it fails to load,
+     the page just loses zoom and nothing else breaks. -->
+<script src="https://cdn.jsdelivr.net/npm/medium-zoom@1.1.0/dist/medium-zoom.min.js" defer></script>
+
 <script>
-  function playVideo(wrap, videoId) {
-    const iframeWrap = wrap.querySelector('.yt-iframe-wrap');
-    iframeWrap.innerHTML = '<iframe src="https://www.youtube.com/embed/' + videoId + '?autoplay=1" allowfullscreen allow="autoplay"></iframe>';
-    iframeWrap.style.display = 'block';
-    wrap.querySelector('img').style.display = 'none';
-    wrap.querySelector('.yt-play-btn').style.display = 'none';
-    wrap.style.cursor = 'default';
+(function () {
+  'use strict';
+
+  /* ---- Mobile nav (the original hid the links with nothing to replace them) ---- */
+  var toggle = document.getElementById('navToggle');
+  var panel  = document.getElementById('navPanel');
+
+  function setNav(open) {
+    toggle.setAttribute('aria-expanded', String(open));
+    toggle.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+    panel.classList.toggle('open', open);
   }
 
-  const filterBtns = document.querySelectorAll('.filter-btn');
-  const cards = document.querySelectorAll('.project-card');
-  filterBtns.forEach(btn => {
-    btn.addEventListener('click', () => {
-      filterBtns.forEach(b => b.classList.remove('active'));
-      btn.classList.add('active');
-      const f = btn.dataset.filter;
-      cards.forEach(card => {
-        card.style.display = (f === 'all' || card.dataset.type === f) ? '' : 'none';
+  toggle.addEventListener('click', function () {
+    setNav(toggle.getAttribute('aria-expanded') !== 'true');
+  });
+
+  panel.addEventListener('click', function (e) {
+    if (e.target.closest('a')) setNav(false);
+  });
+
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape' && toggle.getAttribute('aria-expanded') === 'true') {
+      setNav(false);
+      toggle.focus();
+    }
+  });
+
+  document.addEventListener('click', function (e) {
+    if (toggle.getAttribute('aria-expanded') !== 'true') return;
+    if (!e.target.closest('#navPanel') && !e.target.closest('#navToggle')) setNav(false);
+  });
+
+  /* ---- YouTube: maxresdefault 404s on some videos, fall back to hqdefault ---- */
+  document.querySelectorAll('.yt img').forEach(function (img) {
+    img.addEventListener('error', function handle() {
+      img.removeEventListener('error', handle);
+      img.src = img.src.replace('maxresdefault', 'hqdefault');
+    });
+  });
+
+  /* ---- Click/keyboard to play ---- */
+  document.querySelectorAll('.yt').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      var id = btn.dataset.video;
+      var frame = document.createElement('iframe');
+      frame.src = 'https://www.youtube.com/embed/' + id + '?autoplay=1&rel=0';
+      frame.title = btn.getAttribute('aria-label').replace(/^Play video: /, '');
+      frame.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; picture-in-picture';
+      frame.allowFullscreen = true;
+      btn.replaceWith(frame);
+    });
+  });
+
+  /* ---- Project filter ---- */
+  var buttons = document.querySelectorAll('.filter-btn');
+  var cards = document.querySelectorAll('#grid .card');
+
+  buttons.forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      buttons.forEach(function (b) { b.setAttribute('aria-pressed', String(b === btn)); });
+      var f = btn.dataset.filter;
+      cards.forEach(function (card) {
+        card.hidden = !(f === 'all' || card.dataset.type === f);
       });
     });
   });
 
-  const reveals = document.querySelectorAll('.reveal');
-  const observer = new IntersectionObserver(entries => {
-    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
-  }, { threshold: 0.1 });
-  reveals.forEach(r => observer.observe(r));
+  /* ---- Reveal, staggered, once ---- */
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var reveals = document.querySelectorAll('.reveal');
+
+  if (reduce || !('IntersectionObserver' in window)) {
+    reveals.forEach(function (el) { el.classList.add('in'); });
+  } else {
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry, i) {
+        if (!entry.isIntersecting) return;
+        var el = entry.target;
+        setTimeout(function () { el.classList.add('in'); }, Math.min(i, 3) * 70);
+        io.unobserve(el);
+      });
+    }, { threshold: 0.12, rootMargin: '0px 0px -8% 0px' });
+    reveals.forEach(function (el) { io.observe(el); });
+  }
+
+  /* ---- Zoom the workflow screenshots ---- */
+  window.addEventListener('load', function () {
+    if (typeof mediumZoom === 'function') {
+      mediumZoom('[data-zoomable]', {
+        background: 'rgba(20,17,14,0.95)',
+        margin: 28
+      });
+    }
+  });
+
+  document.getElementById('year').textContent = new Date().getFullYear();
+})();
 </script>
 </body>
 </html>
